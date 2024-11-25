@@ -1,5 +1,15 @@
-ol#documents_list.w-full.min-w-0
-  = render partial: "document_list_item", collection: @documents, as: :document
+ol#documents_list.w-full.mb-8.min-w-0(data-controller="paginationa")
+  = @page.number
+
+  = render partial: "document_list_item", collection: @page.records, as: :document
+
+  = @page.next_param
+
+  - unless @page.last?
+    = link_to files_unit_documents_path(current_unit, page: @page.next_param),
+              class: "block text-center text-brand-500",
+              data: { pagination_target: "nextPageLink" } do
+        i.fa-solid.fa-spinner.fa-spin.fa-fw  
 
 css:
   #deselect_all_button {

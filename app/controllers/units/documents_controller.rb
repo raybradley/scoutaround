@@ -35,11 +35,9 @@ class Units::DocumentsController < UnitContextController
 
   def tag
     authorize Document, policy_class: UnitDocumentPolicy
-
     cookies[:documents_variant] = params[:variant]
-
     scope = current_unit.documents.includes(file_attachment: :blob).order("active_storage_blobs.filename ASC")
-    @documents = scope.all
+    set_page_and_extract_portion_from scope
     @can_delete = UnitDocumentPolicy.new(current_member, Document).destroy?
   end
 

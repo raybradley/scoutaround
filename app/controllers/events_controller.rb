@@ -525,8 +525,6 @@ class EventsController < UnitContextController
   end
 
   def find_list_events
-    # GearedPagination::Ratios.send(:remove_const, :DEFAULTS) if defined?(GearedPagination::Ratios::DEFAULT)
-    # GearedPagination::Ratios.const_set("DEFAULTS", [15, 30, 50, 100])
     scope = current_unit.events.includes([event_locations: :location], :tags, :event_category, :event_rsvps)
     scope = scope.published unless EventPolicy.new(current_member, current_unit).view_drafts?
     scope = params[:before].present? ? scope.where("id < ?", params[:before]) : scope.future
