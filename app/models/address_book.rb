@@ -33,6 +33,7 @@ class AddressBook
 
   def build_events
     events = unit.events.recent_and_upcoming.rsvp_required.with_accepted_rsvps
+    ap events
     return if events.empty?
 
     @entries += events.map { |event| AddressBookEventEntry.new(event) }

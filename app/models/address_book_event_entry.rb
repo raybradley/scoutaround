@@ -9,7 +9,7 @@ class AddressBookEventEntry < AddressBookEntry
   end
 
   def key
-    "event_#{id}"
+    "event_#{event.id}"
   end
 
   def name
@@ -18,6 +18,6 @@ class AddressBookEventEntry < AddressBookEntry
 
   def description
     count = event.event_rsvps.accepted.count
-    "(#{count} attending)"
+    "#{count} attendee"
   end
 end

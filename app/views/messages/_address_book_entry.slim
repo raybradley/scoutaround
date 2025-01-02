@@ -10,4 +10,8 @@
       = address_book_entry.name
 
     .contact-methods.text-sm.flex.flex-row.gap-4.whitespace-nowrap
-      = raw(address_book_entry.description)
+      -if address_book_entry.is_a? AddressBookEventEntry
+        = pluralize(address_book_entry.event.event_rsvps.accepted.count, "contactable attendee")
+
+      - else
+        = raw(address_book_entry.description)

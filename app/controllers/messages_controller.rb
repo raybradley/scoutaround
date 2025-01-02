@@ -79,13 +79,6 @@ class MessagesController < UnitContextController
   end
 
   def addressables
-    # lists = current_unit.distribution_lists
-    # events = current_unit.events.includes(event_rsvps: [unit_membership: :user]).published.rsvp_required.recent_and_future
-    # members = current_unit.members.includes(:setting_objects, :event_rsvps,
-    #                                         user: :setting_objects).order("users.last_name, users.first_name")
-
-    # @addressables = MessagingSearchResult.to_a(lists + events + members)
-    # @addressables = []
     @address_book = AddressBook.new(current_unit)
   end
 
