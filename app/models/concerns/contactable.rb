@@ -10,6 +10,7 @@ module Contactable
   def contactable?(via: :any)
     return contactable_object.emailable? if via == :email
     return contactable_object.smsable? if via == :sms
+    return contactable_object.in_app_notifiable? if via == :in_app_notification
     return contactable_object.emailable? || contactable_object.smsable? if via == :any
 
     false
@@ -31,6 +32,10 @@ module Contactable
   def smsable?
     contactable_object.phone.present? &&
       contact_preference?(via: :sms)
+  end
+
+  def in_app_notifiable?
+    true
   end
 
   private

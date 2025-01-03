@@ -28,7 +28,7 @@ class AddressBook
   def build_distribution_list(key, name, keywords, members)
     description = "#{members.count} contactable members"
     @entries << AddressBookDistributionListEntry.new(key: key, name: name, keywords: keywords,
-                                                     description: description)
+                                                     description: description, count: members.count)
   end
 
   def build_events
