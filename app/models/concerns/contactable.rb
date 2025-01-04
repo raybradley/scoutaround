@@ -35,7 +35,7 @@ module Contactable
   end
 
   def in_app_notifiable?
-    true
+    false
   end
 
   private

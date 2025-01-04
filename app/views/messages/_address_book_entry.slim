@@ -9,15 +9,16 @@
 
     .flex.flex-row.justify-between.items-center
       .name.font-medium(class="#{address_book_entry.contactable_status == 'contactable' ? '' : 'text-stone-400'}")
-        - if address_book_entry.is_a? AddressBookEventEntry
-          i.fa-regular.fa-fw.text-brand-500.fa-calendar.mr-2(title="Automatic event group")
-        - elsif address_book_entry.is_a? AddressBookMemberEntry
-          - if address_book_entry.member.youth?
-            i.fa-solid.fa-fw.text-brand-500.fa-user.mr-2(title="Youth member")
-          - elsif address_book_entry.member.adult?
-            i.fa-regular.fa-fw.text-brand-500.fa-user.mr-2(title="Adult member")
-        - elsif address_book_entry.is_a? AddressBookDistributionListEntry
-          i.fa-regular.fa-fw.text-brand-500.fa-users.mr-2(title="Built-in")
+        span(class="#{address_book_entry.contactable_status == 'contactable' ? 'text-brand-500' : ''}")
+          - if address_book_entry.is_a? AddressBookEventEntry
+            i.fa-regular.fa-fw.fa-calendar.mr-2(title="Automatic event group")
+          - elsif address_book_entry.is_a? AddressBookMemberEntry
+            - if address_book_entry.member.youth?
+              i.fa-solid.fa-fw.fa-user.mr-2(title="Youth member")
+            - elsif address_book_entry.member.adult?
+              i.fa-regular.fa-fw.fa-user.mr-2(title="Adult member")
+          - elsif address_book_entry.is_a? AddressBookDistributionListEntry
+            i.fa-regular.fa-fw.fa-users.mr-2(title="Built-in")
 
         = address_book_entry.name
 
@@ -35,6 +36,10 @@
 
           - if address_book_entry.member.contactable?(via: :in_app_notification)
             i.fa-regular.fa-mobile.ml-1(title="Contactable via in-app notifications")
+
+          - if !address_book_entry.member.contactable?
+            span.text-stone-400.font-normal.text-xs
+              = "Not contactable"
         
         - elsif address_book_entry.is_a? AddressBookDistributionListEntry
           .rounded-lg.bg-brand-100.text-brand-600.px-2.py-1
